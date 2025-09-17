@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Performance Predictor</title>
+  <link rel="icon" href="Icon.jpg" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.4/lottie.min.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    /* ===== Intro Screen ===== */
+    #intro {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      z-index: 10;
+    }
+
+    #intro h1 {
+      font-size: 36px;
+      margin-top: 20px;
+      opacity: 0;
+      animation: fadeInUp 1s forwards;
+      animation-delay: 0.5s;
+    }
+
+    #intro p {
+      font-size: 18px;
+      margin-top: 10px;
+      opacity: 0;
+      animation: fadeInUp 1s forwards;
+      animation-delay: 1s;
+    }
+
+    #lottie {
+      width: 200px;
+      height: 200px;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeOut {
+      to { opacity: 0; visibility: hidden; }
+    }
+
+    /* ===== Form Card ===== */
+    .form-card {
+      background: #fff;
+      padding: 40px 30px;
+      border-radius: 15px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+      width: 100%;
+      max-width: 600px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 1s ease;
+      z-index: 1;
+      position: relative;
+    }
+
+    .form-card.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    h1.form-title {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #2575fc;
+      font-size: 28px;
+    }
+
+    table { width: 100%; border-spacing: 12px; }
+    td { vertical-align: middle; }
+
+    input[type="text"], input[type="number"], select {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: #2575fc;
+      box-shadow: 0 0 8px rgba(37,117,252,0.4);
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 20px;
+      border: none;
+      border-radius: 10px;
+      background: #2575fc;
+      color: #fff;
+      font-size: 18px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background: #6a11cb;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    label { font-weight: 600; font-size: 14px; }
+
+    tr { opacity: 0; transform: translateY(20px); animation: slideUp 0.6s forwards; }
+    tr:nth-child(1) { animation-delay: 0.1s; }
+    tr:nth-child(2) { animation-delay: 0.2s; }
+    tr:nth-child(3) { animation-delay: 0.3s; }
+    tr:nth-child(4) { animation-delay: 0.4s; }
+    tr:nth-child(5) { animation-delay: 0.5s; }
+    tr:nth-child(6) { animation-delay: 0.6s; }
+    tr:nth-child(7) { animation-delay: 0.7s; }
+    tr:nth-child(8) { animation-delay: 0.8s; }
+    tr:nth-child(9) { animation-delay: 0.9s; }
+
+    @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 640px) { .form-card { padding: 30px 20px; } }
+  </style>
+</head>
+<body>
+
+  <!-- Intro Animation -->
+  <div id="intro">
+    <div id="lottie"></div>
+    <h1>Student Performance Predictor</h1>
+    <p>Analyzing student success factors...</p>
+  </div>
+
+  <!-- Form -->
+  <div class="form-card" id="formCard">
+    <h1 class="form-title">Student Performance Predictor</h1>
+    <form>
+      <table>
+        <tr><td><label for="name">Student Name</label></td><td><input type="text" id="name" name="name" required></td></tr>
+        <tr><td><label for="roll">Roll Number</label></td><td><input type="number" id="roll" name="roll" required></td></tr>
+        <tr><td><label for="class">Class</label></td><td><input type="text" id="class" name="class" required></td></tr>
+        <tr><td><label for="department">Department</label></td><td>
+          <select id="department" name="department">
+            <option>CSE</option><option>AIDS</option><option>AIML</option><option>IT</option><option>CYB</option>
+            <option>ECE</option><option>MECH</option><option>VLSI</option><option>ACT</option><option>BME</option>
+          </select>
+        </td></tr>
+        <tr><td><label for="year">Year</label></td><td>
+          <select id="year" name="year">
+            <option>First Year</option><option>Second Year</option><option>Third Year</option><option>Final Year</option>
+          </select>
+        </td></tr>
+        <tr><td><label for="assignments">Assignment Completion Rate (%)</label></td><td><input type="number" id="assignments" name="assignments" min="0" max="100" required></td></tr>
+        <tr><td><label for="attendance">Attendance (%)</label></td><td><input type="number" id="attendance" name="attendance" min="0" max="100" required></td></tr>
+        <tr><td><label for="tests">Internal Tests Marks (%)</label></td><td><input type="number" id="tests" name="tests" min="0" max="100" required></td></tr>
+      </table>
+      <button type="submit">Predict Performance</button>
+    </form>
+  </div>
+
+  <script>
+    // Load Lottie animation
+    lottie.loadAnimation({
+      container: document.getElementById("lottie"),
+      renderer: "svg",
+      loop: true,
+      autoplay: true,
+      path: "https://assets1.lottiefiles.com/packages/lf20_u4yrau.json"
+    });
+
+    // Transition from intro to form
+    setTimeout(() => {
+      document.getElementById("intro").style.animation = "fadeOut 1s forwards";
+      document.getElementById("formCard").classList.add("show");
+    }, 4000); // show intro for 4s
+  </script>
+</body>
+</html>
